@@ -1,0 +1,14 @@
+Tarea
+
+Crear una migración para la tabla 'users'
+Campos:
+    id (primary key)
+    name (vachar 100)
+    email (varchar 150)
+    password (vachar 200)
+    rol (enum['admin','user])
+
+Crear una migración para agregar campos a 'users'
+created_at
+updated_at
+deleted_at
