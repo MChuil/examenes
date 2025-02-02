@@ -10,7 +10,8 @@ class Home extends BaseController
             'title' => 'Mi primer proyecto con Codeigniter 4',
             'message' => 'Hola desde Codeigniter'
         ];
-        return view('welcome_message', $data);
+        //return view('welcome_message', $data);
+        return view('layout/index');
     }
 
     public function welcome($name = null){
