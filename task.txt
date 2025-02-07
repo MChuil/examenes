@@ -1,4 +1,5 @@
-Tarea 01-Feb-2025
+Tarea 07-Feb-2025
 
-- Craer los modelos faltantes
-- Crear los seeder faltantes
+- Corregir los seeder para que cada pregunta tenga 4 respuestas
+- Crear la Vista, Controlador y Ruta de Examenes
+- Crear la Vista, Controlador y Ruta de Perfil

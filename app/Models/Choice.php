@@ -9,7 +9,7 @@ class Choice extends Model
     protected $table            = 'choices';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
-    protected $returnType       = 'array';
+    protected $returnType       = 'object';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
     protected $allowedFields    = ['question_id', 'choice_text', 'is_correct'];
