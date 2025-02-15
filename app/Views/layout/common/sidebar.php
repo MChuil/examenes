@@ -26,7 +26,7 @@
                 <h3>General</h3>
                 <ul class="nav side-menu">
                     <li><a href="<?= base_url('/')  ?>"><i class="fa fa-home"></i>Inicio</a></li>    
-                    <li><a href="javascript:void(0)"><i class="fa fa-question-circle"></i>Examenes</a></li>    
+                    <li><a href="<?= base_url('/examenes')  ?>"><i class="fa fa-question-circle"></i>Examenes</a></li>    
                     <li><a href="<?= base_url('/usuarios')  ?>"><i class="fa fa-users"></i>Usuarios</a></li>    
                 </ul>
             </div>
@@ -38,7 +38,7 @@
             <a href="<?= base_url('/')  ?>" data-toggle="tooltip" data-placement="top" title="Inicio">
                 <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
             </a>
-            <a data-toggle="tooltip" data-placement="top" title="Examenes">
+            <a href="<?= base_url('/examemes')  ?>" data-toggle="tooltip" data-placement="top" title="Examenes">
                 <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
             </a>
             <a href="<?= base_url('/usuarios')  ?>" data-toggle="tooltip" data-placement="top" title="Usuarios">

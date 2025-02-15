@@ -7,11 +7,12 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/', 'HomeController::index');
 
-$routes->get('/usuarios', 'UserController::index');
-
 $routes->get('/examenes', 'ExamController::index');
 
 $routes->get('/perfil', 'ProfileController::index');
+
+$routes->presenter('usuarios', ['controller' => 'UserController']);
+
 
 // $routes->get('/saludo/(:alpha)', 'Home::welcome/$1');
 

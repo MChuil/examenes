@@ -10,7 +10,7 @@
                         <img src="images/img.jpg" alt="">John Doe
                     </a>
                     <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="javascript:;"> Perfil</a>
+                        <a class="dropdown-item" href='<?= base_url('/perfil') ?>'> Perfil</a>
                         <a class="dropdown-item" href="login.html"><i class="fa fa-sign-out pull-right"></i> Salir</a>
                     </div>
                 </li>
