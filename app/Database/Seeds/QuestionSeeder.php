@@ -11,7 +11,7 @@ class QuestionSeeder extends Seeder
     {
         $question = new Question();
 
-        for ($x = 0; $x < 1000; $x++) {
+        for ($x = 1; $x <= 20; $x++) {
             $question->insert([
                 'question' => "Pregunta de prueba {$x}"
             ]);

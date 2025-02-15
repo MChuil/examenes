@@ -5,4 +5,6 @@
 <?= $this->section("content") ?>
     <h1>Bienvenido al sistema de Examenes On-line</h1>
 
+    <?php echo base_url(); ?>
+
 <?= $this->endSection() ?>

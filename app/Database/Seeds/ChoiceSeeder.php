@@ -13,12 +13,17 @@ class ChoiceSeeder extends Seeder
     {
         $choice = new Choice();
 
-        for ($x = 0; $x < 4000; $x++) {
-            $choice->insert([
-                'question_id' => rand(1, 1000), // pregunta al azar
-                'choice_text' => "Opción de prueba {$x}",
-                'is_correct'  => ($x % 4 == 0) ? 1 : 0 // Cada 4 respuestas una es correcta
-            ]);
+        // 4 respuestas x pregunta
+        for ($question_id = 1; $question_id <= 20; $question_id++) {
+            $correctAnswer = rand(1, 4); // opcion correcta aleatoria
+
+            for ($option = 1; $option <= 4; $option++) {
+                $choice->insert([
+                    'question_id' => $question_id,
+                    'choice_text' => "Opción {$option} para pregunta {$question_id}",
+                    'is_correct'  => ($option === $correctAnswer) ? 1 : 0
+                ]);
+            }
         }
     }
 }

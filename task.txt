@@ -1,5 +1,6 @@
 Tarea 07-Feb-2025
 
 - Corregir los seeder para que cada pregunta tenga 4 respuestas
+
 - Crear la Vista, Controlador y Ruta de Examenes
 - Crear la Vista, Controlador y Ruta de Perfil

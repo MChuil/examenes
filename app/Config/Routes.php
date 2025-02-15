@@ -8,6 +8,11 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'HomeController::index');
 
 $routes->get('/usuarios', 'UserController::index');
+
+$routes->get('/examenes', 'ExamController::index');
+
+$routes->get('/perfil', 'ProfileController::index');
+
 // $routes->get('/saludo/(:alpha)', 'Home::welcome/$1');
 
 // $routes->get('/productos', 'ProductController::index');
