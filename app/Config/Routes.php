@@ -9,6 +9,11 @@ $routes->get('/', 'HomeController::index');
 
 $routes->get('/examenes', 'ExamController::index');
 
+$routes->get('/examenes/new', 'ExamController::new'); 
+
+$routes->post('/examenes/create', 'ExamController::create'); 
+
+
 $routes->get('/perfil', 'ProfileController::index');
 
 $routes->presenter('usuarios', ['controller' => 'UserController']);
