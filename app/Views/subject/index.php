@@ -18,33 +18,36 @@
                         </div>
                     <?php } ?>
                     <div>
-                        <a href="<?= base_url('examenes/new') ?>" class="btn btn-primary">Nuevo Examen</a>
+                        <a href="<?= base_url('examenes/new') ?>" class="btn btn-primary btn-sm">Nuevo Examen</a>
                     </div>
                     <hr>
                     <table class="table table-bordered">
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Nombre del Examen</th>
+                                <th>Examen</th>
+                                <th>Creación</th>
+                                <th>Ultimo cambio</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php if (!empty($exams)) : ?>
-                                <?php foreach ($exams as $exam) : ?>
+                            <?php if (!empty($subjects)) : ?>
+                                <?php foreach ($subjects as $subject) : ?>
                                     <tr>
-                                        <td><?= $exam['id'] ?></td>
-                                        <td><?= $exam['title'] ?></td>
+                                        <td><?= $subject->id ?></td>
+                                        <td><?= $subject->title ?></td>
+                                        <td><?= $subject->created_at ?></td>
+                                        <td><?= $subject->updated_at ?></td>
                                         <td>
-                                            <a href="<?= base_url('examenes/' . $exam['id']) ?>" class="btn btn-info">Ver</a>
-                                            <a href="<?= base_url('examenes/edit/' . $exam['id']) ?>" class="btn btn-warning">Editar</a>
-                                            <a href="<?= base_url('examenes/delete/' . $exam['id']) ?>" class="btn btn-danger">Eliminar</a>
+                                            <a href="<?= base_url('examenes/show/' . $subject->id) ?>" class="btn btn-info btn-sm">Ver</a>
+                                            <a href="<?= base_url('examenes/edit/' . $subject->id) ?>" class="btn btn-warning btn-sm">Editar</a>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
                             <?php else : ?>
                                 <tr>
-                                    <td colspan="3" class="text-center">examkenes</td>
+                                    <td colspan="3" class="text-center">No hay examenes registrados</td>
                                 </tr>
                             <?php endif; ?>
                         </tbody>

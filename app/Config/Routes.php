@@ -7,16 +7,18 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/', 'HomeController::index');
 
-$routes->get('/examenes', 'ExamController::index');
+// $routes->get('/examenes', 'ExamController::index');
 
-$routes->get('/examenes/new', 'ExamController::new'); 
+// $routes->get('/examenes/new', 'ExamController::new'); 
 
-$routes->post('/examenes/create', 'ExamController::create'); 
+// $routes->post('/examenes/create', 'ExamController::create'); 
 
 
 $routes->get('/perfil', 'ProfileController::index');
 
 $routes->presenter('usuarios', ['controller' => 'UserController']);
+$routes->presenter('examenes', ['controller' => 'SubjectController']);
+$routes->presenter('preguntas', ['controller' => 'QuestionController']);
 
 
 // $routes->get('/saludo/(:alpha)', 'Home::welcome/$1');

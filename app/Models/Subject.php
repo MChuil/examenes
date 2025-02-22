@@ -4,15 +4,15 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class Question extends Model
+class Subject extends Model
 {
-    protected $table            = 'questions';
+    protected $table            = 'subjects';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'object';
-    protected $useSoftDeletes   = false;
+    protected $useSoftDeletes   = true;
     protected $protectFields    = true;
-    protected $allowedFields    = ['subject_id', 'question'];
+    protected $allowedFields    = ['title'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
@@ -21,13 +21,11 @@ class Question extends Model
     protected array $castHandlers = [];
 
     // Dates
-    
     protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
     protected $deletedField  = 'deleted_at';
-    
 
     // Validation
     protected $validationRules      = [];
