@@ -12,11 +12,7 @@
                     </span>
                 </div>
                 <div class="card-body">
-                    <?php if(session()->getFlashdata('success')){ ?>
-                        <div class="alert alert-success">
-                            <?= session()->getFlashdata('success') ?>
-                        </div>
-                    <?php } ?>
+                    <?= $this->include('shared/messages') ?>
                     <div>
                         <a href="<?= base_url('examenes/new') ?>" class="btn btn-primary btn-sm">Nuevo Examen</a>
                     </div>

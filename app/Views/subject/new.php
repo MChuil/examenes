@@ -10,17 +10,7 @@
                         <span class="h2"><?= $title ?></span>
                     </div>
                     <div class="card-body">
-                        <?php if($msg = session()->getFlashdata('errors')){ ?>
-                            <div class="alert alert-danger">
-                                <?php 
-                                    if(is_array($msg)){ //es un array
-                                        echo implode('<br>', $msg);
-                                    }else{ //si no es array
-                                        echo $msg;
-                                    }
-                                ?>
-                            </div>
-                        <?php } ?>
+                        <?= $this->include('shared/messages') ?>
                         <form method="post" action="<?= base_url('examenes/create') ?>">
                             <div class="form-group">
                                 <label for="title">Título del Examen</label>

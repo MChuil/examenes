@@ -28,15 +28,54 @@ class UserController extends BaseController
     {
         try {
             $rules = [
-                'name' => 'required|min_length[3]|max_length[100]',
-                'email' => 'required|valid_email|is_unique[users.email]', // Validar que el email no exista
-                'password' => 'required|min_length[6]|max_length[200]',
-                'password_repeat' => 'required|matches[password]',
-                'rol' => 'required|in_list[admin,user]'
+                'name' => [
+                    'label' => 'Nombre',
+                    'rules' =>  'required|min_length[3]|max_length[100]',
+                    'errors' => [
+                        'required' => 'El campo {field} es obligatorio.',
+                        'min_length' => 'Epa, ni modos que tengas un {field} tan corto, minimo 4 caracteres.',
+                        'max_length' => 'Sos largo, ese {field} no existe maximo 100 caracteres.'
+                    ]
+                ],
+                'email' => [
+                    'label' => 'Correo electrónico',
+                    'rules' => 'required|valid_email|is_unique[users.email]',
+                    'errors' => [
+                        'required' => 'El campo {field} es obligatorio.',
+                        'valid_email' => 'El campo {field} debe ser un email válido.',
+                        'is_unique' => 'El campo {field} ya existe en la base de datos.'
+                    ]
+                ],
+                'password' => [
+                    'label' => 'Contraseña',
+                    'rules' =>  'required|min_length[6]|max_length[200]',
+                    'errors' => [
+                        'required' => 'El campo {field} es obligatorio.',
+                        'min_length' => 'El campo {field} debe tener minimo 6 caracteres.',
+                        'max_length' => 'El campo {field} debe tener maximo 200 caracteres.'
+                    ]
+                ],
+                'password_repeat' => [
+                    'label' => 'Repetir contraseña',
+                    'rules' => 'required|matches[password]',
+                    'errors' => [
+                        'required' => 'El campo {field} es obligatorio.',
+                        'matches' => 'Las contraseñas no coinciden.'
+                    ]
+                ],
+                'rol' => [
+                    'label' => 'Rol',
+                    'rules' => 'required|in_list[admin,user]',
+                    'errors' => [
+                        'required' => 'El campo {field} es obligatorio.',
+                        'in_list' => 'El campo {field} debe ser admin o user.'
+                    ]
+                ]
             ];
 
+            
             if (!$this->validate($rules)) {
-                return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+                return redirect()->back()->withInput()->with('error', $this->validator->getErrors());
             }
 
             $password = password_hash($this->request->getPost('password'), PASSWORD_DEFAULT);
@@ -84,9 +123,8 @@ class UserController extends BaseController
             ];
 
             if (!$this->validate($rules)) {
-                return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+                return redirect()->to(base_url("usuarios/edit/{$id}"))->withInput()->with('error', $this->validator->getErrors());
             }
-
             $data = [
                 "name" => strtoupper($this->request->getPost('name')),
                 "email" => trim($this->request->getPost('email')),
@@ -104,12 +142,21 @@ class UserController extends BaseController
 
     public function delete($id)
     {
-        $userModel = new User();
-        if ($userModel->find($id)) {
-            $userModel->delete($id);
+        // $userModel = new User();
+        // if ($userModel->find($id)) {
+        //     $userModel->delete($id);
+        //     return redirect()->to(base_url('usuarios'))->with('success', 'Usuario eliminado correctamente.');
+        // } else {
+        //     return redirect()->to(base_url('usuarios'))->with('error', 'Usuario no encontrado.');
+        // }
+
+
+        try{
+            $user = new User();
+            $user->delete($id);
             return redirect()->to(base_url('usuarios'))->with('success', 'Usuario eliminado correctamente.');
-        } else {
-            return redirect()->to(base_url('usuarios'))->with('error', 'Usuario no encontrado.');
+        }catch(\Exception $e){
+            return redirect()->to(base_url('usuarios'))->with('error', $e->getMessage());
         }
     }
 }

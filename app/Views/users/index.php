@@ -10,17 +10,7 @@
                     <span class="h2"><?= $title ?></span>
                 </div>
                 <div class="card-body">
-                    <?php if (session()->getFlashdata('success')) { ?>
-                        <div class="alert alert-success">
-                            <?= session()->getFlashdata('success') ?>
-                        </div>
-                    <?php } ?>
-                    <?php if (session()->getFlashdata('error')) { ?>
-                        <div class="alert alert-danger">
-                            <?= session()->getFlashdata('error') ?>
-                        </div>
-                    <?php } ?>
-
+                    <?= $this->include('shared/messages') ?>
                     <div class="mb-3">
                         <a href="<?= base_url('usuarios/new') ?>" class="btn btn-primary">Nuevo usuario</a>
                     </div>

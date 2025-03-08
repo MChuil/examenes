@@ -10,14 +10,15 @@
                     <span class="h2"><?= $title ?></span>
                 </div>
                 <div class="card-body">
+                    <?= $this->include('shared/messages') ?>
                     <form method="post" action="<?= base_url('usuarios/create') ?>">
                         <div class="form-group">
                             <label for="name">Nombre</label>
-                            <input type="text" id="name" name="name" class="form-control" required>
+                            <input type="text" id="name" name="name" class="form-control" value="<?= old('name') ?>" required>
                         </div>
                         <div class="form-group">
                             <label for="email">Correo electrónico</label>
-                            <input type="email" id="email" name="email" class="form-control" required>
+                            <input type="email" id="email" name="email" class="form-control" value="<?= old('email') ?>" required>
                         </div>
                         <div class="form-group">
                             <label for="password">Contraseña</label>
@@ -30,6 +31,7 @@
                         <div class="form-group">
                             <label for="rol">Tipo de usuario</label>
                             <select id="rol" name="rol" class="form-control" required>
+                                <option value="" selected>Seleccione</option>
                                 <option value="admin">Administrador</option>
                                 <option value="user">Usuario</option>
                             </select>

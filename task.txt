@@ -1,3 +1,7 @@
-Tarea 22-Feb-2025
+Tarea 08-Marzo-2025
 
--CRUD  de Usuarios
+- Pasar la validaciones a español
+- Agregar validación en 'Nuevo Examen'
+- Crear la secciòn de perfil que muestre los datos del usuario logueado y 
+un formulario para cambiar al contraseña
+- Agregar validación a login
