@@ -11,7 +11,9 @@
                     </a>
                     <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href='<?= base_url('/perfil') ?>'> Perfil</a>
-                        <a class="dropdown-item" href="login.html"><i class="fa fa-sign-out pull-right"></i> Salir</a>
+                        <form action="<?= base_url('/logout') ?>" method="post">
+                            <button type="submit" class="dropdown-item"><i class="fa fa-sign-out pull-right"></i> Salir</button>
+                        </form>
                     </div>
                 </li>
             </ul>

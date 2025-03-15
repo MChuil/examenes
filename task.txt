@@ -1,7 +1,6 @@
-Tarea 08-Marzo-2025
-
--Pasar la validaciones a español
-Agregar validación en 'Nuevo Examen'
--Crear la secciòn de perfil que muestre los datos del usuario logueado y 
-un formulario para cambiar al contraseña
-Agregar validación a login
+Tarea 15.03.25
+- Agregar validaciones y en español al cambio de contraseña
+- En el formulario de cambio de contraseña, que no se pierdan los 
+  datos cuando haya algun error
+- Antes de Salir que pregunte y confirme
+- Mostrar correctamente las preguntas existentes y sus respuestas

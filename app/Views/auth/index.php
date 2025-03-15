@@ -6,18 +6,7 @@
 <div class="login_wrapper">
     <div class="animate form login_form">
         <section class="login_content">
-            <?php if ($msg = session()->getFlashdata('error_login')) { ?>
-                <div class="alert alert-error">
-                    <?php
-                    if (is_array($msg)) {
-                        echo implode('<br>', $msg);
-                    } else {
-                        echo $msg;
-                    }
-                    ?>
-                </div>
-            <?php } ?>
-
+            <?= $this->include('shared/messages') ?>
             <form action="<?= base_url('login') ?>" method="post">
                 <h1>Inicio de sesión</h1>
                 <div>

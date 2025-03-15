@@ -33,7 +33,7 @@ class AuthController extends BaseController
         ];
         
         if (!$this->validate($rules)) {
-            return redirect()->back()->withInput()->with('error_login', $this->validator->getErrors());
+            return redirect()->back()->withInput()->with('error', $this->validator->getErrors());
         }
 
         $email = $this->request->getPost("email");
@@ -55,8 +55,14 @@ class AuthController extends BaseController
                 //redirigir al tablero
                 return redirect()->to("/tablero");
             }
-            return redirect()->back()->with('error_login', 'Credenciales incorrectas')->withInput();
+            return redirect()->back()->with('error', 'Credenciales incorrectas')->withInput();
         }
-        return redirect()->back()->with('error_login', 'Credenciales incorrectas')->withInput();
+        return redirect()->back()->with('error', 'Credenciales incorrectas')->withInput();
+    }
+
+    public function logout(){
+        $session = session();
+        $session->destroy();
+        return redirect()->to("/");
     }
 }

@@ -5,14 +5,7 @@
 <?= $this->section("content") ?>
     <div class="container mt-4">
         <h1 class="mb-4">Perfil de Usuario</h1>
-
-        <!-- Mensajes de éxito o error -->
-        <?php if (session()->getFlashdata('success')): ?>
-            <div class="alert alert-success"><?= session()->getFlashdata('success') ?></div>
-        <?php endif; ?>
-        <?php if (session()->getFlashdata('error')): ?>
-            <div class="alert alert-danger"><?= session()->getFlashdata('error') ?></div>
-        <?php endif; ?>
+        <?= $this->include('shared/messages') ?>
 
         <!-- Datos del usuario -->
         <div class="card mb-4">
@@ -28,8 +21,7 @@
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Cambiar Contraseña</h5>
-                <form action="<?= base_url('profile/change-password') ?>" method="post">
-                    <?= csrf_field() ?>
+                <form action="<?= base_url('perfil/change-password') ?>" method="post">
                     <div class="mb-3">
                         <label for="current_password" class="form-label">Contraseña Actual</label>
                         <input type="password" name="current_password" id="current_password" class="form-control" required>

@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\Question;
 use App\Models\Subject;
 use CodeIgniter\HTTP\ResponseInterface;
 
@@ -24,6 +25,7 @@ class SubjectController extends BaseController
         return view("subject/new", $data);
     }
 
+    // Crea el examen
     public function create()
     {
         try {
@@ -75,20 +77,43 @@ class SubjectController extends BaseController
         }
     }
 
+    // Muestra el examen y sus preguntas
     public function show($id){
-        $subject = new Subject();
-        $subject->select('subjects.*, questions.id AS question_id, questions.question AS question_text, choices.id AS choice_id, choices.choice_text AS choice_text, choices.is_correct');
-        $subject->join('questions', 'questions.subject_id = subjects.id');
-        $subject->join('choices', 'choices.question_id = questions.id');
-        $subject->where('subjects.id', $id);
-        $response = $subject->findAll();
+        $subjects = new Subject();
+        $subject = $subjects->find($id);
 
-        echo json_encode($response);
-        return;
+        $questions = new Question();
+        $questions->select('questions.*, choices.id AS choice_id, choices.choice_text, choices.is_correct');
+        $questions->join('choices', 'choices.question_id = questions.id');
+        $questions->where('questions.subject_id', $id);
+        $dataQuestions = $questions->findAll();
+
         $data = [
             'title' => 'Examen',
-            'subject' => $response
+            'subject' => $subject,
+            'dataQuestions' => $dataQuestions
         ];
         return view("subject/show", $data);
+    }
+
+    public function edit($id){
+        $subject = new Subject();
+        $data = [
+            'title' => 'Editar Examen',
+            'subject' => $subject->find($id)
+        ];
+        return view("subject/edit", $data);
+    }
+
+    public function update($id){
+        //reglas de validaciòn
+
+        $title = $this->request->getPost('title');
+        //Actualizar el examen
+        $subject = new Subject();
+        $subject->update($id, ['title' => $title]);
+        //reririgir a la lista de examenes
+        return redirect()->to(base_url('examenes'))->with('success', 'Examen actualizado correctamente.');
+        
     }
 }

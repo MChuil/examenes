@@ -7,6 +7,8 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/', 'AuthController::index');
 $routes->post('/login', 'AuthController::login');
+$routes->post('/logout', 'AuthController::logout');
+
 
 $routes->get('/tablero', 'HomeController::index');
 
@@ -18,7 +20,6 @@ $routes->get('/tablero', 'HomeController::index');
 
 
 $routes->get('/perfil', 'ProfileController::index');
-
 $routes->post('/perfil/change-password', 'ProfileController::changePassword');
 
 $routes->presenter('usuarios', ['controller' => 'UserController']);

@@ -71,7 +71,14 @@
                                 <th>Opciones</th>
                             </tr>
                         </thead>
-                     
+                        <tbody>
+                            <?php foreach($dataQuestions as $row){ ?>
+                                <tr>
+                                    <td><?= $row->question?></td>
+                                    <td><?= $row->choice_text ?></td>
+                                </tr>
+                            <?php } ?>
+                        </tbody>
                     </table>
                 </div>
             </div>
@@ -80,5 +87,7 @@
         </div>
     </div>
 </div>
+
+<?php echo json_encode($dataQuestions); ?>
 
 <?= $this->endSection() ?>
