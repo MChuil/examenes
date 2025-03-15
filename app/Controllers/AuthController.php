@@ -14,7 +14,27 @@ class AuthController extends BaseController
     }
 
     public function login(){
-        //agregar validaciones
+        $rules = [
+            'email' => [
+                'label' => 'Correo electrónico',
+                'rules' => 'required|valid_email',
+                'errors' => [
+                    'required' => 'El campo {field} es obligatorio.',
+                    'valid_email' => 'El {field} debe ser válido.'
+                ]
+            ],
+            'password' => [
+                'label' => 'Contraseña',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'El campo {field} es obligatorio.'
+                ]
+            ]
+        ];
+        
+        if (!$this->validate($rules)) {
+            return redirect()->back()->withInput()->with('error_login', $this->validator->getErrors());
+        }
 
         $email = $this->request->getPost("email");
         $password = $this->request->getPost("password");
@@ -35,8 +55,8 @@ class AuthController extends BaseController
                 //redirigir al tablero
                 return redirect()->to("/tablero");
             }
-            return redirect()->back()->with("error", "Credenciales incorrectas");
+            return redirect()->back()->with('error_login', 'Credenciales incorrectas')->withInput();
         }
-        return redirect()->back()->with("error", "Credenciales incorrectas");
+        return redirect()->back()->with('error_login', 'Credenciales incorrectas')->withInput();
     }
 }

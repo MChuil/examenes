@@ -6,27 +6,28 @@
 <div class="login_wrapper">
     <div class="animate form login_form">
         <section class="login_content">
-            <?php if ($msg = session()->getFlashdata('error')) { ?>
+            <?php if ($msg = session()->getFlashdata('error_login')) { ?>
                 <div class="alert alert-error">
                     <?php
-                    if (is_array($msg)) { //es un array
+                    if (is_array($msg)) {
                         echo implode('<br>', $msg);
-                    } else { //si no es array
+                    } else {
                         echo $msg;
                     }
                     ?>
                 </div>
             <?php } ?>
+
             <form action="<?= base_url('login') ?>" method="post">
                 <h1>Inicio de sesión</h1>
                 <div>
-                    <input type="email" name="email" class="form-control" placeholder="Correo electronico" required="" />
+                    <input type="email" name="email" class="form-control" placeholder="Correo electronico" required="" value="<?= old('email') ?>" />
                 </div>
                 <div>
                     <input type="password" name="password" class="form-control" placeholder="Contraseña" required="" />
                 </div>
                 <div>
-                    <button type="submit" class="btn btn-primary btn-block" >Entrar</button>
+                    <button type="submit" class="btn btn-primary btn-block">Entrar</button>
                 </div>
                 <div class="text-right">
                     <small>
@@ -54,34 +55,49 @@
 
     <div id="register" class="animate form registration_form">
         <section class="login_content">
-            <form>
+            <?php if ($msg = session()->getFlashdata('error_register')) { ?>
+                <div class="alert alert-danger">
+                    <?php
+                    if (is_array($msg)) {
+                        echo implode('<br>', $msg); // Mostrar los errores si son un array
+                    } else {
+                        echo $msg; // Mostrar el mensaje en caso contrario
+                    }
+                    ?>
+                </div>
+            <?php } ?>
+
+            <form action="<?= base_url('usuarios/create') ?>" method="post">
                 <h1>Crear Cuenta</h1>
                 <div>
-                    <input type="text" class="form-control" placeholder="Username" required="" />
+                    <input type="text" name="name" class="form-control" placeholder="Nombre" required="" value="<?= old('name') ?>" />
                 </div>
                 <div>
-                    <input type="email" class="form-control" placeholder="Email" required="" />
+                    <input type="email" name="email" class="form-control" placeholder="Correo electrónico" required="" value="<?= old('email') ?>" />
                 </div>
                 <div>
-                    <input type="password" class="form-control" placeholder="Password" required="" />
+                    <input type="password" name="password" class="form-control" placeholder="Contraseña" required="" value="<?= old('password') ?>" />
                 </div>
                 <div>
-                    <a class="btn btn-default submit" href="index.html">Submit</a>
+                    <input type="password" name="password_repeat" class="form-control" placeholder="Repetir contraseña" required="" value="<?= old('password_repeat') ?>" />
+                </div>
+                <input type="hidden" name="rol" value="user" />
+                <div>
+                    <button type="submit" class="btn btn-primary btn-block">Crear cuenta</button>
                 </div>
 
                 <div class="clearfix"></div>
 
                 <div class="separator">
-                    <p class="change_link">Already a member ?
-                        <a href="#signin" class="to_register"> Log in </a>
+                    <p class="change_link">¿Ya tienes una cuenta?
+                        <a href="#signin" class="to_register"> Iniciar sesión </a>
                     </p>
 
                     <div class="clearfix"></div>
                     <br />
 
                     <div>
-                        <h1><i class="fa fa-paw"></i> Gentelella Alela!</h1>
-                        <p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 4 template. Privacy and Terms</p>
+                        <p>Proyecto Escolar - <?= env("TITLE") ?> | &copy; <?= date('Y') ?></p>
                     </div>
                 </div>
             </form>

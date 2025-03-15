@@ -13,7 +13,7 @@
             </div>
             <div class="profile_info">
                 <span>Welcome,</span>
-                <h2>John Doe</h2>
+                <h2> <?= session('name') ?></h2>
             </div>
         </div>
         <!-- /menu profile quick info -->
@@ -25,7 +25,7 @@
             <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
-                    <li><a href="<?= base_url('/')  ?>"><i class="fa fa-home"></i>Inicio</a></li>    
+                    <li><a href="<?= base_url('/tablero')  ?>"><i class="fa fa-home"></i>Inicio</a></li>    
                     <li><a href="<?= base_url('/examenes')  ?>"><i class="fa fa-question-circle"></i>Examenes</a></li>    
                     <li><a href="<?= base_url('/usuarios')  ?>"><i class="fa fa-users"></i>Usuarios</a></li>    
                 </ul>

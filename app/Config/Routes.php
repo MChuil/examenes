@@ -19,6 +19,8 @@ $routes->get('/tablero', 'HomeController::index');
 
 $routes->get('/perfil', 'ProfileController::index');
 
+$routes->post('/perfil/change-password', 'ProfileController::changePassword');
+
 $routes->presenter('usuarios', ['controller' => 'UserController']);
 $routes->presenter('examenes', ['controller' => 'SubjectController']);
 $routes->presenter('preguntas', ['controller' => 'QuestionController']);

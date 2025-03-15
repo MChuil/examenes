@@ -1,7 +1,7 @@
 Tarea 08-Marzo-2025
 
-- Pasar la validaciones a español
-- Agregar validación en 'Nuevo Examen'
-- Crear la secciòn de perfil que muestre los datos del usuario logueado y 
+-Pasar la validaciones a español
+Agregar validación en 'Nuevo Examen'
+-Crear la secciòn de perfil que muestre los datos del usuario logueado y 
 un formulario para cambiar al contraseña
-- Agregar validación a login
+Agregar validación a login

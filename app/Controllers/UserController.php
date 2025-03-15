@@ -75,7 +75,7 @@ class UserController extends BaseController
 
             
             if (!$this->validate($rules)) {
-                return redirect()->back()->withInput()->with('error', $this->validator->getErrors());
+                return redirect()->to(base_url('/#signup'))->withInput()->with('error_register', $this->validator->getErrors());
             }
 
             $password = password_hash($this->request->getPost('password'), PASSWORD_DEFAULT);
@@ -90,10 +90,11 @@ class UserController extends BaseController
             $userModel = new User();
             $userModel->insert($data);
 
-            return redirect()->to(base_url('usuarios'))->with('success', 'Usuario creado correctamente.');
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', $e->getMessage())->withInput();
-        }
+            // UserController.php
+            return redirect()->to(base_url('/#signin'))->with('success', 'Usuario creado correctamente. Inicia sesión.');
+            } catch (\Exception $e) {
+                return redirect()->to(base_url('/#signup'))->with('error_register', $e->getMessage())->withInput();
+            }
     }
 
     public function edit($id)

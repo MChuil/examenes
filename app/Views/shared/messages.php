@@ -21,3 +21,16 @@
         ?>
     </div>
 <?php } ?>
+
+
+<?php if ($errors = session()->getFlashdata('errors')) { ?>
+    <div class="alert alert-danger">
+        <?php
+        if (is_array($errors)) { 
+            echo implode('<br>', $errors);
+        } else { 
+            echo $errors;
+        }
+        ?>
+    </div>
+<?php } ?>
