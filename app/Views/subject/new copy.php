@@ -27,11 +27,14 @@
                             <div id="questions-container">
                                 <div class="question-item">
                                     <label>Pregunta:</label>
+                                    
                                     <input type="text" name="questions[0][text]" class="form-control" required>
 
                                     <div class="answers mt-2">
                                         <label>Opciones:</label>
                                         <?php for ($i = 0; $i < 4; $i++) { ?>
+                                            
+                                            
                                             <div class="input-group mb-2">
                                                 <input type="text" name="questions[0][answers][<?= $i ?>][text]" class="form-control" required placeholder="Opción <?= $i + 1 ?>">
                                                 <div class="input-group-append">

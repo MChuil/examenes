@@ -58,34 +58,44 @@
                 </div>
             </div>
         </div>
+
         <div class="col-12 col-lg-6">
-            <div class="card">
-                <div class="card-header bg-success text-white">
-                    <span class="h2">Preguntas existentes</span>
-                </div>
-                <div class="card-body">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>Pregunta</th>
-                                <th>Opciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php foreach($dataQuestions as $row){ ?>
-                                <tr>
-                                    <td><?= $row->question?></td>
-                                    <td><?= $row->choice_text ?></td>
-                                </tr>
-                            <?php } ?>
-                        </tbody>
-                    </table>
+                <div class="card">
+                    <div class="card-header bg-success text-white">
+                        <span class="h2">Preguntas existentes</span>
+                    </div>
+                    <div class="card-body">
+                        <?php
+                        $questionsGrouped = [];
+                        foreach($dataQuestions as $row) {
+                            $questionsGrouped[$row->question][] = $row;
+                        }
+
+                        foreach($questionsGrouped as $questionText => $options) { ?>
+                            <div class="card mb-3 shadow-sm">
+                                <div class="card-header bg-primary text-white">
+                                    <h5 class="mb-0"><?= $questionText ?></h5>
+                                </div>
+                                <div class="card-body">
+                                    <ul class="list-group">
+                                        <?php foreach($options as $option) { ?>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                <?= $option->choice_text ?>
+                                                <?php if ($option->is_correct == "1") { ?>
+                                                    <span class="badge badge-success">Correcta</span>
+                                                <?php } else { ?>
+                                                    <span class="badge badge-danger">Incorrecta</span>
+                                                <?php } ?>
+                                            </li>
+                                        <?php } ?>
+                                    </ul>
+                                </div>
+                            </div>
+                        <?php } ?>
+                    </div>
                 </div>
             </div>
-            
-
-        </div>
-    </div>
+       </div>
 </div>
 
 <?php echo json_encode($dataQuestions); ?>

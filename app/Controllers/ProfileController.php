@@ -44,7 +44,37 @@ class ProfileController extends BaseController
     }
 
     public function changePassword(){
-        // Validar los datos del formulario
+        
+        $rules = [
+            'current_password' => [
+                'label' => 'Contraseña actual',
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'El campo {field} es obligatorio.',
+                ]
+            ],
+            'new_password' => [
+                'label' => 'Nueva contraseña',
+                'rules' => 'required|min_length[6]',
+                'errors' => [
+                    'required' => 'El campo {field} es obligatorio.',
+                    'min_length' => 'La {field} debe tener al menos 6 caracteres.'
+                ]
+            ],
+            'confirm_password' => [
+                'label' => 'Confirmar nueva contraseña',
+                'rules' => 'required|matches[new_password]',
+                'errors' => [
+                    'required' => 'El campo {field} es obligatorio.',
+                    'matches' => 'Las contraseñas no coinciden.'
+                ]
+            ]
+        ];
+    
+        if (!$this->validate($rules)) {
+            return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
+        }
+    
 
         $curretPassword = $this->request->getPost('current_password');
         $newPassword = $this->request->getPost('new_password'); 
