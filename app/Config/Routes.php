@@ -25,6 +25,8 @@ $routes->post('/perfil/change-password', 'ProfileController::changePassword');
 $routes->presenter('usuarios', ['controller' => 'UserController']);
 $routes->presenter('examenes', ['controller' => 'SubjectController']);
 $routes->presenter('preguntas', ['controller' => 'QuestionController']);
+$routes->get('respuestas/show/(:num)', 'ChoiceController::show/$1');
+$routes->post('respuestas/delete/(:num)', 'ChoiceController::delete/$1');
 
 
 // $routes->get('/saludo/(:alpha)', 'Home::welcome/$1');

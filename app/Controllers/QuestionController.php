@@ -15,9 +15,7 @@ class QuestionController extends BaseController
     }
 
     public function create(){
-        $data = $this->request->getPost();
-        echo json_encode($data);
-    
+        $data = $this->request->getPost();   
         try{
             $rules = [
                 'question' => 'required|min_length[5]|max_length[150]',
@@ -31,10 +29,17 @@ class QuestionController extends BaseController
             if (!$this->validate($rules)) {
                 return redirect()->back()->withInput()->with('errors', $this->validator->getErrors());
             }
-
             $subjectId = $this->request->getPost('subject_id');
-            // 1. Guardar la pregunta
             $question = new Question();
+            
+            // validar la cantidad de preguntas
+            $count = $question->where('subject_id', $subjectId)->countAllResults();
+            if($count >= getenv('MAXQUESTIONS')){
+                return redirect()->back()->withInput()->with('errors', 'No se pueden agregar más de ' . getenv('MAXQUESTIONS') . ' preguntas');
+            }
+
+
+            // 1. Guardar la pregunta
             $idQuestion = $question->insert(['subject_id' => $subjectId, 'question' => $this->request->getPost('question')]);
 
             // 2. Guardar las opciones
@@ -51,6 +56,22 @@ class QuestionController extends BaseController
 
             return redirect()->to(base_url("examenes/show/{$subjectId}"))->with('success', 'Pregunta creada correctamente.');
 
+        } catch (\Exception $e) {
+            return redirect()->back()->with('errors', $e->getMessage())->withInput();
+        }
+    }
+
+    public function delete($id)
+    {
+        try{
+            //eliminaciòn fisica de las respuestas
+            // $choice = new Choice();
+            // $choice->where('question_id', $id)->delete();
+
+            //eliminación logica de la pregunta
+            $question = new Question();
+            $question->delete($id);
+            return redirect()->back()->with('success', 'Pregunta eliminada correctamente.');
         } catch (\Exception $e) {
             return redirect()->back()->with('errors', $e->getMessage())->withInput();
         }

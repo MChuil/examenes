@@ -1,6 +1,4 @@
-Tarea 15.03.25
-- Agregar validaciones y en español al cambio de contraseña--------------------listo
-- En el formulario de cambio de contraseña, que no se pierdan los 
-  datos cuando haya algun error------------------------------------------------listo
-- Antes de Salir que pregunte y confirme----------------------------------------listo
-- Mostrar correctamente las preguntas existentes y sus respuestas---------------
+24 de Marzo
+- Antes de eliminar una pregunta, pedir confirmación
+- Antes de eliminar una respuesta, pedir confirmación
+- Hacer funcionar el formulario de editar respuesta.

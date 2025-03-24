@@ -94,5 +94,6 @@
     <!-- Custom Theme Scripts -->
     <script src="<?= base_url("build/js/custom.min.js") ?>"></script>
 	
+    <?= $this->renderSection("scripts") ?>
   </body>
 </html>
