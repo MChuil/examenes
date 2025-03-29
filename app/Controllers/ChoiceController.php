@@ -15,8 +15,9 @@ class ChoiceController extends BaseController
 
     public function show($id){
         $choice = new Choice();
-        $response = $choice->find($id);
-        return json_encode($response);
+        $data = $choice->find($id);
+
+        return $this->response->setJSON($data); 
     }
 
     public function delete($id){
@@ -28,4 +29,34 @@ class ChoiceController extends BaseController
             return redirect()->back()->with('errors', $e->getMessage())->withInput();
         }
     }
+
+    public function update()
+{
+    $choiceId = $this->request->getPost('id');
+    $choiceText = $this->request->getPost('choice_text');
+    $isCorrect = $this->request->getPost('is_correct') === 'on' ? 1 : 0;
+
+    $choice = new Choice();
+    $currentChoice = $choice->find($choiceId);
+
+    if (!$currentChoice) {
+        return redirect()->back()->with('errors', 'La respuesta no existe.');
+    }
+
+    if ($isCorrect) {
+      
+        $choice->where('question_id', $currentChoice->question_id)
+               ->set('is_correct', 0)
+               ->update();
+    }
+
+
+    $choice->update($choiceId, [
+        'choice_text' => $choiceText,
+        'is_correct' => $isCorrect
+    ]);
+
+    return redirect()->back()->with('success', 'Respuesta actualizada correctamente.');
+}
+
 }

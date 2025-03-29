@@ -7,23 +7,29 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <form action="" method="post">
+
+            <form id="editChoiceForm" method="post" action="<?= base_url('respuestas/update') ?>">
+                <div class="modal-body">
                     <div class="form-group">
-                        <label for="">Respuesta</label>
-                        <input type="text" class="form-control" name="choice_text" id="choice_text">
+                        <label for="choice_text">Respuesta</label>
+                        <input type="text" class="form-control" name="choice_text" id="choice_text" required>
                     </div>
+
                     <div class="form-group">
-                        <label for="">Correcta</label>
-                        <input type="checkbox"  name="is_correct" id="is_correct">
+                        <label for="is_correct">Correcta</label>
+                        <input type="checkbox" name="is_correct" id="is_correct">
                     </div>
+
                     <input type="hidden" name="id" id="idChoice">
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary">Actualizar</button>
-            </div>
+                </div>
+
+               
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary" form="editChoiceForm">Actualizar</button>
+                </div>
+            </form>
+
 
         </div>
     </div>

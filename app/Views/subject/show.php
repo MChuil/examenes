@@ -91,8 +91,8 @@
                                                 </div>
                                                 <div>
                                                     <a href="#" class="btn btn-info btn-sm" data-toggle="modal" data-target=".edit-choice" onclick="loadChoice(<?= $option->choice_id ?>)"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
-                                                    <form action ="<?= base_url('respuestas/delete')?>/<?= $option->choice_id ?>" method="post">
-                                                        <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                                    <form action ="<?= base_url('respuestas/delete')?>/<?= $option->choice_id ?>" method="post" onsubmit="return confirm('¿Estás seguro de que deseas eliminar esta respuesta?');">
+                                                        <button type= "submit" class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                                     </form>
                                                 </div>
                                             </li>
@@ -101,7 +101,7 @@
                                     <div class="card-footer d-flex justify-content-end">
                                         <a href="#" class="btn btn-info btn-sm"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
 
-                                        <form action ="<?= base_url('preguntas/delete')?>/<?= $options[0]->id ?>" method="post">
+                                        <form action ="<?= base_url('preguntas/delete')?>/<?= $options[0]->id ?>" method="post"  onsubmit="return confirm('¿Estás seguro de que deseas eliminar esta pregunta y todas sus respuestas?');">
                                             <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                         </form>
                                     </div>
