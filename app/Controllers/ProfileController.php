@@ -17,9 +17,9 @@ class ProfileController extends BaseController
     public function index()
     {
         $session = session();
-        if (!$session->get('isLoggedIn')) {
-            return redirect()->to('/');
-        }
+        // if (!$session->get('isLoggedIn')) {
+        //     return redirect()->to('/');
+        // }
 
         $userModel = new User();
         // $user = $userModel->find($session->get('id')); 

@@ -12,6 +12,7 @@
                     <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href='<?= base_url('/perfil') ?>'> Perfil</a>
                         <form action="<?= base_url('/logout') ?>" method="post">
+                        <?= csrf_field() ?>
                         <button type="submit" class="dropdown-item" onclick="return confirm('¿Está seguro que desea salir?');">
                             <i class="fa fa-sign-out pull-right"></i> Salir
                         </button>

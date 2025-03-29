@@ -7,27 +7,22 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/', 'AuthController::index');
 $routes->post('/login', 'AuthController::login');
-$routes->post('/logout', 'AuthController::logout');
 
-
-$routes->get('/tablero', 'HomeController::index');
-
-// $routes->get('/examenes', 'ExamController::index');
-
-// $routes->get('/examenes/new', 'ExamController::new'); 
-
-// $routes->post('/examenes/create', 'ExamController::create'); 
-
-
-$routes->get('/perfil', 'ProfileController::index');
-$routes->post('/perfil/change-password', 'ProfileController::changePassword');
-
-$routes->presenter('usuarios', ['controller' => 'UserController']);
-$routes->presenter('examenes', ['controller' => 'SubjectController']);
-$routes->presenter('preguntas', ['controller' => 'QuestionController']);
-$routes->get('respuestas/show/(:num)', 'ChoiceController::show/$1');
-$routes->post('respuestas/delete/(:num)', 'ChoiceController::delete/$1');
-$routes->post('respuestas/update', 'ChoiceController::update');
+$routes->group('', ['filter' => 'auth'], function($routes){ //nombre, filtro, callback
+    $routes->post('/logout', 'AuthController::logout');
+    $routes->get('/tablero', 'HomeController::index');
+    // $routes->get('/examenes', 'ExamController::index');
+    // $routes->get('/examenes/new', 'ExamController::new'); 
+    // $routes->post('/examenes/create', 'ExamController::create'); 
+    $routes->get('/perfil', 'ProfileController::index');
+    $routes->post('/perfil/change-password', 'ProfileController::changePassword');
+    $routes->presenter('usuarios', ['controller' => 'UserController']);
+    $routes->presenter('examenes', ['controller' => 'SubjectController']);
+    $routes->presenter('preguntas', ['controller' => 'QuestionController']);
+    $routes->get('respuestas/show/(:num)', 'ChoiceController::show/$1');
+    $routes->post('respuestas/delete/(:num)', 'ChoiceController::delete/$1');
+    $routes->post('respuestas/update', 'ChoiceController::update');   
+});
 
 
 
