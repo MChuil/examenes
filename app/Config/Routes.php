@@ -7,6 +7,13 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/', 'AuthController::index');
 $routes->post('/login', 'AuthController::login');
+$routes->post('register', 'AuthController::register');
+
+
+$routes->get('exams/available', 'SubjectController::available');
+$routes->get('exams/take/(:num)', 'SubjectController::show/$1');
+
+
 
 $routes->group('', ['filter' => 'auth'], function($routes){ //nombre, filtro, callback
     $routes->post('/logout', 'AuthController::logout');

@@ -21,7 +21,7 @@
             <div class="card-body">
                 <h5 class="card-title">Cambiar Contraseña</h5>
                 <form action="<?= base_url('perfil/change-password') ?>" method="post">
-                    
+                <?= csrf_field() ?>
                     
                     <div class="mb-3">
                         <label for="current_password" class="form-label">Contraseña Actual</label>

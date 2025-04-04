@@ -27,6 +27,7 @@
                         </div>
                     <?php } ?>
                     <form method="post" action="<?= base_url('preguntas/create') ?>">
+                    <?= csrf_field() ?>
                         <h4>Preguntas</h4>
                         <div id="questions-container">
                             <div class="question-item">
@@ -92,6 +93,7 @@
                                                 <div>
                                                     <a href="#" class="btn btn-info btn-sm" data-toggle="modal" data-target=".edit-choice" onclick="loadChoice(<?= $option->choice_id ?>)"><i class="fa fa-pencil-square" aria-hidden="true"></i></a>
                                                     <form action ="<?= base_url('respuestas/delete')?>/<?= $option->choice_id ?>" method="post" onsubmit="return confirm('¿Estás seguro de que deseas eliminar esta respuesta?');">
+                                                    <?= csrf_field() ?>
                                                         <button type= "submit" class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                                     </form>
                                                 </div>

@@ -12,6 +12,7 @@
                 <div class="card-body">
                     <?= $this->include('shared/messages') ?>
                     <form method="post" action="<?= base_url('usuarios/create') ?>">
+                    <?= csrf_field() ?>
                         <div class="form-group">
                             <label for="name">Nombre</label>
                             <input type="text" id="name" name="name" class="form-control" value="<?= old('name') ?>" required>
@@ -33,7 +34,7 @@
                             <select id="rol" name="rol" class="form-control" required>
                                 <option value="" selected>Seleccione</option>
                                 <option value="admin">Administrador</option>
-                                <option value="user">Usuario</option>
+                                <option value="student">Estudiante</option>
                             </select>
                         </div>
                         <hr>

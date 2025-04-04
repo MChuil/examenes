@@ -1,10 +1,10 @@
 29 de Marzo
-- Crear un nuevo filtro para administradores (admin)
-- Registrar ese filtro en Filters.php
-- Agregar el metodo crsf_field a TODOS los formularios
-- Crear una pagina donde se listen los examenes disponibles y boton para tomar el examenes
-- hacer funcionar la pagina de registro de solo estudiantes
-- cambiar en la table usuarios los roles por: admin, student
+- Crear un nuevo filtro para administradores (admin) -------------------------------------------------listo
+- Registrar ese filtro en Filters.php-----------------------------------------------------------------listo
+- Agregar el metodo crsf_field a TODOS los formularios------------------------------------------------listo
+- Crear una pagina donde se listen los examenes disponibles y boton para tomar el examenes------------listo
+- hacer funcionar la pagina de registro de solo estudiantes-------------------------------------------listo
+- cambiar en la table usuarios los roles por: admin, student------------------------------------------listo
 
 
 Force Brut
