@@ -116,4 +116,15 @@ class SubjectController extends BaseController
         return redirect()->to(base_url('examenes'))->with('success', 'Examen actualizado correctamente.');
         
     }
+
+    public function available()
+        {
+            $subject = new Subject();
+            $data = [
+                'title' => 'Examenes dispobnibles',
+                'subjects' => $subject->findAll()
+            ];
+            return view('subject/list', $data); 
+        }
+
 }

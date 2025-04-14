@@ -7,7 +7,7 @@
     <div class="animate form login_form">
         <section class="login_content">
             <?= $this->include('shared/messages') ?>
-            <form action="<?= base_url('login') ?>" method="post">
+            <form action="<?= base_url('login') ?>" method="post"> <?= csrf_field() ?>
                 <h1>Inicio de sesión</h1>
                 <div>
                     <input type="email" name="email" class="form-control" placeholder="Correo electronico" required="" value="<?= old('email') ?>" />
@@ -56,7 +56,7 @@
                 </div>
             <?php } ?>
 
-            <form action="<?= base_url('usuarios/create') ?>" method="post">
+            <form action="<?= base_url('register') ?>" method="post"> <?= csrf_field() ?>
                 <h1>Crear Cuenta</h1>
                 <div>
                     <input type="text" name="name" class="form-control" placeholder="Nombre" required="" value="<?= old('name') ?>" />
@@ -70,7 +70,8 @@
                 <div>
                     <input type="password" name="password_repeat" class="form-control" placeholder="Repetir contraseña" required="" value="<?= old('password_repeat') ?>" />
                 </div>
-                <input type="hidden" name="rol" value="user" />
+                <!--<input type="hidden" name="rol" value="user" />-->
+
                 <div>
                     <button type="submit" class="btn btn-primary btn-block">Crear cuenta</button>
                 </div>

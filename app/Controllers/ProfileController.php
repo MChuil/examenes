@@ -31,7 +31,7 @@ class ProfileController extends BaseController
 
         if($user->rol == 'admin') {
             $user->rol = 'Administrador';
-        }else if($user->rol == 'user') {
+        }else if($user->rol == 'student') { //user a student
             $user->rol = 'Estudiante';
         }
 

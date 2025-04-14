@@ -11,7 +11,7 @@
                     </div>
                     <div class="card-body">
                         <?= $this->include('shared/messages') ?>
-                        <form method="post" action="<?= base_url('examenes/update') ?>/<?= $subject->id ?>">
+                        <form method="post" action="<?= base_url('examenes/update') ?>/<?= $subject->id ?>"> <?= csrf_field() ?>
                             <div class="form-group">
                                 <label for="title">Título del Examen</label>
                                 <input type="text" id="title" name="title" class="form-control" required value="<?= $subject->title ?>" >

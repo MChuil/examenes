@@ -9,6 +9,7 @@
             </div>
 
             <form id="editChoiceForm" method="post" action="<?= base_url('respuestas/update') ?>">
+            <?= csrf_field() ?>
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="choice_text">Respuesta</label>

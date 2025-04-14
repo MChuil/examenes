@@ -63,14 +63,17 @@ class UserController extends BaseController
                         'matches' => 'Las contraseñas no coinciden.'
                     ]
                 ],
+
+                /*
                 'rol' => [
                     'label' => 'Rol',
-                    'rules' => 'required|in_list[admin,user]',
+                    'rules' => 'required|in_list[admin,student]', //user a student
                     'errors' => [
                         'required' => 'El campo {field} es obligatorio.',
                         'in_list' => 'El campo {field} debe ser admin o user.'
                     ]
                 ]
+                    */
             ];
 
             
@@ -84,7 +87,7 @@ class UserController extends BaseController
                 "name" => strtoupper($this->request->getPost('name')),
                 "email" => trim($this->request->getPost('email')),
                 "password" => $password,
-                "rol" => $this->request->getPost('rol')
+                "rol" => 'student'
             ];
 
             $userModel = new User();
@@ -120,7 +123,7 @@ class UserController extends BaseController
             $rules = [
                 'name' => 'required|min_length[3]|max_length[100]',
                 'email' => "required|valid_email|is_unique[users.email,id,$id]",
-                'rol' => 'required|in_list[admin,user]'
+                'rol' => 'required|in_list[admin,student]' //user a student
             ];
 
             if (!$this->validate($rules)) {

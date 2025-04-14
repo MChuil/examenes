@@ -37,6 +37,7 @@
                                             <a href="<?= base_url("usuarios/edit/{$user->id}") ?>" class="btn btn-warning btn-sm">Editar</a>
                                             
                                             <form action="<?= base_url("usuarios/delete/{$user->id}") ?>" method="post" class="d-inline" onsubmit="return confirm('¿Estás seguro de eliminar este usuario?');">
+                                            <?= csrf_field() ?>
                                                 <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
                                             </form>
                                         </td>

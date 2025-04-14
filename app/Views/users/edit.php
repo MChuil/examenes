@@ -11,7 +11,8 @@
                 </div>
                 <div class="card-body">
                     <?= $this->include('shared/messages') ?>
-                    <form action="<?= base_url("usuarios/update/{$user->id}") ?>" method="post">
+                    <form action="<?= base_url("usuarios/update/{$user->id}") ?>" method="post"> <?= csrf_field() ?>
+                    
                         <div class="mb-3">
                             <label for="name" class="form-label">Nombre:</label>
                             <input type="text" name="name" id="name" class="form-control" value="<?= $user->name ?>" required>
@@ -26,7 +27,7 @@
                             <label for="rol" class="form-label">Rol:</label>
                             <select name="rol" id="rol" class="form-control">
                                 <option value="admin" <?= $user->rol === 'admin' ? 'selected' : '' ?>>Administrador</option>
-                                <option value="user" <?= $user->rol === 'user' ? 'selected' : '' ?>>Usuario</option>
+                                <option value="user" <?= $user->rol === 'student' ? 'selected' : '' ?>>Estudiante</option>
                             </select>
                         </div>
 
