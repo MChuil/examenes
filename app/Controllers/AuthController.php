@@ -8,6 +8,7 @@ use CodeIgniter\HTTP\ResponseInterface;
 
 class AuthController extends BaseController
 {
+
     public function index()
     {
         return view("auth/index");
@@ -50,7 +51,8 @@ class AuthController extends BaseController
                     "id" => $user->id,
                     "email" => $user->email,
                     "name" => $user->name,
-                    "isLoggedIn" => true
+                    "isLoggedIn" => true,
+                    "rol" => $user->rol,
                 ]);
                 //redirigir al tablero
                 return redirect()->to("/tablero");

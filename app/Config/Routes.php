@@ -10,25 +10,37 @@ $routes->post('/login', 'AuthController::login');
 $routes->post('register', 'AuthController::register');
 
 
-$routes->get('exams/available', 'SubjectController::available');
-$routes->get('exams/take/(:num)', 'SubjectController::show/$1');
 
 
 
 $routes->group('', ['filter' => 'auth'], function($routes){ //nombre, filtro, callback
     $routes->post('/logout', 'AuthController::logout');
     $routes->get('/tablero', 'HomeController::index');
+    
+    $routes->group('alumno', function($routes){
+        $routes->get('examenes', 'SubjectController::available');
+        $routes->get('examen/(:num)', 'SubjectController::show/$1');
+    });
+    
     // $routes->get('/examenes', 'ExamController::index');
     // $routes->get('/examenes/new', 'ExamController::new'); 
     // $routes->post('/examenes/create', 'ExamController::create'); 
     $routes->get('/perfil', 'ProfileController::index');
     $routes->post('/perfil/change-password', 'ProfileController::changePassword');
-    $routes->presenter('usuarios', ['controller' => 'UserController']);
-    $routes->presenter('examenes', ['controller' => 'SubjectController']);
-    $routes->presenter('preguntas', ['controller' => 'QuestionController']);
-    $routes->get('respuestas/show/(:num)', 'ChoiceController::show/$1');
-    $routes->post('respuestas/delete/(:num)', 'ChoiceController::delete/$1');
-    $routes->post('respuestas/update', 'ChoiceController::update');   
+    
+
+    // Se protege la ruta para administradores
+    $routes->group('', ['filter'=> 'admin'], function($routes){
+        $routes->presenter('usuarios', ['controller' => 'UserController']);
+        $routes->presenter('examenes', ['controller' => 'SubjectController']);
+        $routes->presenter('preguntas', ['controller' => 'QuestionController']);
+        $routes->get('respuestas/show/(:num)', 'ChoiceController::show/$1');
+        $routes->post('respuestas/delete/(:num)', 'ChoiceController::delete/$1');
+        $routes->post('respuestas/update', 'ChoiceController::update');   
+    });
+
+
+    // Ruta especial para admnistradores, aqui le aplicas el filtro de Admin
 });
 
 

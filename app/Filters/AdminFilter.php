@@ -10,11 +10,6 @@ class AdminFilter implements FilterInterface
 {
     public function before(RequestInterface $request, $arguments = null)
     {
-        //logeadfo
-        if (!session()->isLoggedIn) {
-            return redirect()->to('/');
-        }
-
         
         if (session()->get('role') !== 'admin') { //si es admin
             return redirect()->to('/tablero')->with('error', 'Acceso no autorizado.');

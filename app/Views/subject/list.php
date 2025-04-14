@@ -20,7 +20,7 @@
                     <tr>
                         <td><?= esc($exam->title) ?></td>
                         <td>
-                            <a href="<?= base_url("exams/take/{$exam->id}") ?>" class="btn btn-success btn-sm">
+                            <a href="<?= base_url("alumno/examen/{$exam->id}") ?>" class="btn btn-success btn-sm">
                                 Tomar examen
                             </a>
                         </td>

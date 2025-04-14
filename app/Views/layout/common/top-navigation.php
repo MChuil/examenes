@@ -5,9 +5,12 @@
         </div>
         <nav class="nav navbar-nav">
             <ul class=" navbar-right">
+                <span class="font-weight-bold">
+                    Lunes 14 de Abril de 2025
+                </span>
                 <li class="nav-item dropdown open" style="padding-left: 15px;">
                     <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                        <img src="images/img.jpg" alt=""><?= session('name') ?>
+                        <img src="<?= base_url('images/img.jpg')?>" alt=""><?= session('name') ?> <small>(<?= typeUser(session('rol')) ?>)</small>
                     </a>
                     <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href='<?= base_url('/perfil') ?>'> Perfil</a>

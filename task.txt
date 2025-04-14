@@ -1,12 +1,13 @@
-29 de Marzo
-- Crear un nuevo filtro para administradores (admin) -------------------------------------------------listo
-- Registrar ese filtro en Filters.php-----------------------------------------------------------------listo
-- Agregar el metodo crsf_field a TODOS los formularios------------------------------------------------listo
-- Crear una pagina donde se listen los examenes disponibles y boton para tomar el examenes------------listo
-- hacer funcionar la pagina de registro de solo estudiantes-------------------------------------------listo
-- cambiar en la table usuarios los roles por: admin, student------------------------------------------listo
+14 de Abril
+- Crear una función en el helper 'core' que muestre la fecha en el top-header
+- Crear una vista personalizada para responder el examen
+- Crear la migraciòn para la tabla de respuestas del estudiante
+- Hacer que funcione la toma de examen
+- Dar resultado del examen
 
 
-Force Brut
-CSRF (Cross-site request forgery)- Falsificacion de de sulicitudes entre sitios
+estudiante
+-tablero
+-perfil
+-examen
 
