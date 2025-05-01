@@ -1,8 +1,8 @@
 14 de Abril
-- Crear una función en el helper 'core' que muestre la fecha en el top-header
-- Crear una vista personalizada para responder el examen
-- Crear la migraciòn para la tabla de respuestas del estudiante
-- Hacer que funcione la toma de examen
+- Crear una función en el helper 'core' que muestre la fecha en el top-header----listo
+- Crear una vista personalizada para responder el examen-------------------------listo
+- Crear la migraciòn para la tabla de respuestas del estudiante------------------listo
+- Hacer que funcione la toma de examen-------------------------------------------listo
 - Dar resultado del examen
 
 

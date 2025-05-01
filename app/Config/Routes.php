@@ -19,7 +19,14 @@ $routes->group('', ['filter' => 'auth'], function($routes){ //nombre, filtro, ca
     
     $routes->group('alumno', function($routes){
         $routes->get('examenes', 'SubjectController::available');
-        $routes->get('examen/(:num)', 'SubjectController::show/$1');
+        $routes->get('examen/(:num)', 'SubjectController::resolver/$1');
+
+        $routes->post('examen/guardar/(:num)', 'SubjectController::guardarRespuestas/$1');
+
+        $routes->get('historial', 'SubjectController::historial');
+        $routes->get('historial/(:num)', 'SubjectController::verResultados/$1');
+
+
     });
     
     // $routes->get('/examenes', 'ExamController::index');

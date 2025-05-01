@@ -127,4 +127,164 @@ class SubjectController extends BaseController
             return view('subject/list', $data); 
         }
 
+
+        public function resolver($id)
+            {
+                $subjectModel = new Subject();
+                $questionModel = new Question();
+                $choiceModel = new \App\Models\Choice();
+
+                $subject = $subjectModel->find($id);
+
+                if (!$subject) {
+                    return redirect()->to('/alumno/examenes')->with('error', 'El examen no existe.');
+                }
+
+                
+                $questions = $questionModel->where('subject_id', $id)->findAll();
+
+                
+                foreach ($questions as $question) {
+                    $question->choices = $choiceModel
+                        ->where('question_id', $question->id)
+                        ->findAll();
+                }
+
+                $data = [
+                    'title' => 'Responder Examen',
+                    'subject' => $subject,
+                    'questions' => $questions
+                ];
+
+                return view('subject/answer', $data);
+
+            }
+
+
+            public function guardarRespuestas($subject_id)
+                {
+                    $user_id = session('id');
+                    $answers = $this->request->getPost('answers');
+
+                    $choiceModel = new \App\Models\Choice();
+                    $studentAnswerModel = new \App\Models\StudentAnswer();
+
+                    $correctCount = 0;
+                    $totalQuestions = count($answers);
+
+                    foreach ($answers as $question_id => $choice_id) {
+                        $choice = $choiceModel->find($choice_id);
+
+                        $isCorrect = $choice && $choice->is_correct ? 1 : 0;
+
+                        if ($isCorrect) {
+                            $correctCount++;
+                        }
+
+                        $studentAnswerModel->insert([
+                            'user_id'     => $user_id,
+                            'subject_id'  => $subject_id,
+                            'question_id' => $question_id,
+                            'choice_id'   => $choice_id,
+                            'is_correct'  => $isCorrect,
+                            'created_at'  => date('Y-m-d H:i:s')
+                        ]);
+                    }
+
+                    //porcentajue de calificacion
+                    $percentage = ($correctCount / $totalQuestions) * 100;
+
+                    $data = [
+                        'title'           => 'Resultados del Examen',
+                        'correctCount'    => $correctCount,
+                        'incorrectCount'  => $totalQuestions - $correctCount,
+                        'totalQuestions'  => $totalQuestions,
+                        'percentage'      => number_format($percentage, 2),
+                    ];
+
+                    return view('subject/result', $data);
+                }
+
+
+
+                public function historial()
+                    {
+                        $studentAnswerModel = new \App\Models\StudentAnswer();
+                        $subjectModel = new \App\Models\Subject();
+
+                        $user_id = session('id');
+
+                       
+                        $answeredSubjects = $studentAnswerModel
+                            ->select('subject_id')
+                            ->where('user_id', $user_id)
+                            ->groupBy('subject_id')
+                            ->findAll();
+
+                        $subjects = [];
+
+                        foreach ($answeredSubjects as $entry) {
+                            $subject = $subjectModel->find($entry->subject_id);
+                            if ($subject) {
+                                $subjects[] = $subject;
+                            }
+                        }
+
+                        $data = [
+                            'title' => 'Historial de Exámenes',
+                            'subjects' => $subjects
+                        ];
+
+                        return view('subject/history', $data);
+                    }
+
+
+                    public function verResultados($subject_id)
+                    {
+                        $user_id = session('id');
+                        $studentAnswerModel = new \App\Models\StudentAnswer();
+                        $subjectModel = new \App\Models\Subject();
+
+                        $subject = $subjectModel->find($subject_id);
+
+                        if (!$subject) {
+                            return redirect()->to('/alumno/historial')->with('error', 'Examen no encontrado.');
+                        }
+
+                        $answers = $studentAnswerModel
+                            ->where('user_id', $user_id)
+                            ->where('subject_id', $subject_id)
+                            ->findAll();
+
+                        if (empty($answers)) {
+                            return redirect()->to('/alumno/historial')->with('error', 'No has contestado este examen.');
+                        }
+
+                        $totalQuestions = count($answers);
+                        $correctAnswers = 0;
+
+                        foreach ($answers as $answer) {
+                            if ($answer->is_correct) {
+                                $correctAnswers++;
+                            }
+                        }
+
+                        $percentage = ($correctAnswers / $totalQuestions) * 100;
+
+                        $data = [
+                            'title' => 'Detalle del Examen',
+                            'subject' => $subject,
+                            'totalQuestions' => $totalQuestions,
+                            'correctAnswers' => $correctAnswers,
+                            'incorrectAnswers' => $totalQuestions - $correctAnswers,
+                            'percentage' => number_format($percentage, 2)
+                        ];
+
+                        return view('subject/history_detail', $data);
+                    }
+
+
+
+
+
 }

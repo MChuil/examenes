@@ -29,9 +29,11 @@
                     <?php if(session('rol') == 'admin'): ?>
                         <li><a href="<?= base_url('/examenes')  ?>"><i class="fa fa-question-circle"></i>Examenes</a></li>    
                         <li><a href="<?= base_url('/usuarios')  ?>"><i class="fa fa-users"></i>Usuarios</a></li>    
-                    <?php  else: ?>
-                        <li><a href="<?= base_url('/alumno/examenes')  ?>"><i class="fa fa-question-circle"></i>Examenes</a></li>    
+                    <?php else: ?>
+                        <li><a href="<?= base_url('/alumno/examenes') ?>"><i class="fa fa-question-circle"></i>Examenes</a></li>    
+                        <li><a href="<?= base_url('/alumno/historial') ?>"><i class="fa fa-list"></i>Historial de Exámenes</a></li>    
                     <?php endif; ?>
+
                 </ul>
             </div>
         </div>
