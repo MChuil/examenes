@@ -1,13 +1,13 @@
-14 de Abril
-- Crear una función en el helper 'core' que muestre la fecha en el top-header----listo
-- Crear una vista personalizada para responder el examen-------------------------listo
-- Crear la migraciòn para la tabla de respuestas del estudiante------------------listo
-- Hacer que funcione la toma de examen-------------------------------------------listo
-- Dar resultado del examen
+01 Mayo
+- Eliminar el subject_id  y relacionar la tabla de respuestas con el estudiante
+- Vista de listado de Examenes disponibles, indicar que examen ya se tomo
+- Al repetir un examen, se debe eliminar el registro anterior
+- Para el Admnistrador, en el index, mostrar un resumen de:
+    * cuantos alumnos registrados en la plataforma
+    * cuantos examenes registrados en la plataforma
+    * cuantos examenes tomados por los alumnos
+- Corregir el footer del menu
 
-
-estudiante
--tablero
--perfil
--examen
-
+Opcional
+- La tabla de subject tenga el usuario que lo creo
+- El examen y respuestas solo pudede ser modificado por el usuario que lo creo

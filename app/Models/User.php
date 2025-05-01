@@ -46,4 +46,10 @@ class User extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    //Total de usuarios estudiantes
+    public function totalStudent(){
+        $this->where('rol', 'student');
+        return $this->countAllResults();
+    }
 }
