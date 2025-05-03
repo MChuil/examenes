@@ -120,12 +120,33 @@ class SubjectController extends BaseController
 
     public function available()
         {
-            $subject = new Subject();
+            $subjectModel = new Subject();
+            $studentAnswerModel = new \App\Models\StudentAnswer();
+            $user_id = session('id');
+        
+            
+            $subjects = $subjectModel->findAll();
+        
+            
+            foreach ($subjects as &$exam) {
+                $lastAnswer = $studentAnswerModel
+                    ->select('student_answers.created_at')
+                    ->join('questions', 'questions.id = student_answers.question_id')
+                    ->where('student_answers.user_id', $user_id)
+                    ->where('questions.subject_id', $exam->id)
+                    ->orderBy('student_answers.created_at', 'DESC')
+                    ->first();
+        
+               
+                $exam->last_attempt_date = $lastAnswer->created_at ?? null;
+            }
+        
             $data = [
-                'title' => 'Examenes dispobnibles',
-                'subjects' => $subject->findAll()
+                'title' => 'Examenes disponibles',
+                'subjects' => $subjects
             ];
-            return view('subject/list', $data); 
+        
+            return view('subject/list', $data);
         }
 
 
@@ -169,13 +190,24 @@ class SubjectController extends BaseController
 
                     $choiceModel = new \App\Models\Choice();
                     $studentAnswerModel = new \App\Models\StudentAnswer();
+                    $questionModel = new \App\Models\Question();
+
+                    $questionIds = $questionModel->where('subject_id', $subject_id)->findColumn('id');
+
+                   
+                    if (!empty($questionIds)) {
+                        $studentAnswerModel
+                            ->where('user_id', $user_id)
+                            ->whereIn('question_id', $questionIds)
+                            ->delete();
+                    }
+                    
 
                     $correctCount = 0;
                     $totalQuestions = count($answers);
 
                     foreach ($answers as $question_id => $choice_id) {
                         $choice = $choiceModel->find($choice_id);
-
                         $isCorrect = $choice && $choice->is_correct ? 1 : 0;
 
                         if ($isCorrect) {
@@ -184,15 +216,14 @@ class SubjectController extends BaseController
 
                         $studentAnswerModel->insert([
                             'user_id'     => $user_id,
-                            'subject_id'  => $subject_id,
                             'question_id' => $question_id,
                             'choice_id'   => $choice_id,
                             'is_correct'  => $isCorrect,
+                            'attempt'     => 1, 
                             'created_at'  => date('Y-m-d H:i:s')
                         ]);
                     }
 
-                    //porcentajue de calificacion
                     $percentage = ($correctCount / $totalQuestions) * 100;
 
                     $data = [
@@ -208,81 +239,84 @@ class SubjectController extends BaseController
 
 
 
+
                 public function historial()
-                    {
-                        $studentAnswerModel = new \App\Models\StudentAnswer();
-                        $subjectModel = new \App\Models\Subject();
+                {
+                    $studentAnswerModel = new \App\Models\StudentAnswer();
+                    $subjectModel = new \App\Models\Subject();
+                    $user_id = session('id');
 
-                        $user_id = session('id');
+                    
+                    $subjectIds = $studentAnswerModel
+                        ->select('questions.subject_id')
+                        ->join('questions', 'questions.id = student_answers.question_id')
+                        ->where('student_answers.user_id', $user_id)
+                        ->groupBy('questions.subject_id')
+                        ->findColumn('subject_id'); 
 
-                       
-                        $answeredSubjects = $studentAnswerModel
-                            ->select('subject_id')
-                            ->where('user_id', $user_id)
-                            ->groupBy('subject_id')
-                            ->findAll();
+                    
+                    $subjects = $subjectIds ? $subjectModel->whereIn('id', $subjectIds)->findAll() : [];
 
-                        $subjects = [];
+                    $data = [
+                        'title' => 'Historial de Exámenes',
+                        'subjects' => $subjects
+                    ];
 
-                        foreach ($answeredSubjects as $entry) {
-                            $subject = $subjectModel->find($entry->subject_id);
-                            if ($subject) {
-                                $subjects[] = $subject;
-                            }
-                        }
-
-                        $data = [
-                            'title' => 'Historial de Exámenes',
-                            'subjects' => $subjects
-                        ];
-
-                        return view('subject/history', $data);
-                    }
-
+                    return view('subject/history', $data);
+                }
 
                     public function verResultados($subject_id)
                     {
                         $user_id = session('id');
                         $studentAnswerModel = new \App\Models\StudentAnswer();
                         $subjectModel = new \App\Models\Subject();
+                        $questionModel = new \App\Models\Question();
 
                         $subject = $subjectModel->find($subject_id);
-
                         if (!$subject) {
                             return redirect()->to('/alumno/historial')->with('error', 'Examen no encontrado.');
                         }
 
-                        $answers = $studentAnswerModel
-                            ->where('user_id', $user_id)
-                            ->where('subject_id', $subject_id)
-                            ->findAll();
+                        $questions = $questionModel->where('subject_id', $subject_id)->findAll();
+                        $questionIds = array_column($questions, 'id');
 
-                        if (empty($answers)) {
-                            return redirect()->to('/alumno/historial')->with('error', 'No has contestado este examen.');
+                        if (empty($questionIds)) {
+                            return redirect()->to('/alumno/historial')->with('error', 'No hay preguntas asociadas a este examen.');
                         }
 
-                        $totalQuestions = count($answers);
-                        $correctAnswers = 0;
+                        $answers = $studentAnswerModel
+                            ->where('user_id', $user_id)
+                            ->whereIn('question_id', $questionIds)
+                            ->findAll();
 
+                        $correct = 0;
                         foreach ($answers as $answer) {
                             if ($answer->is_correct) {
-                                $correctAnswers++;
+                                $correct++;
                             }
                         }
 
-                        $percentage = ($correctAnswers / $totalQuestions) * 100;
+                        $total = count($answers);
+                        $percentage = $total > 0 ? ($correct / $total) * 100 : 0;
 
                         $data = [
-                            'title' => 'Detalle del Examen',
+                            'title' => 'Historial de Resultados',
                             'subject' => $subject,
-                            'totalQuestions' => $totalQuestions,
-                            'correctAnswers' => $correctAnswers,
-                            'incorrectAnswers' => $totalQuestions - $correctAnswers,
-                            'percentage' => number_format($percentage, 2)
+                            'attempts' => [[
+                                'attempt'    => 1,
+                                'correct'    => $correct,
+                                'incorrect'  => $total - $correct,
+                                'total'      => $total,
+                                'percentage' => number_format($percentage, 2),
+                                'date'       => $answers[0]->created_at ?? date('Y-m-d H:i:s')
+                            ]]
                         ];
 
                         return view('subject/history_detail', $data);
                     }
+
+                    
+                    
 
 
 

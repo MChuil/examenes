@@ -1,11 +1,13 @@
 01 Mayo
-- Eliminar el subject_id  y relacionar la tabla de respuestas con el estudiante
-- Vista de listado de Examenes disponibles, indicar que examen ya se tomo
-- Al repetir un examen, se debe eliminar el registro anterior
+- Eliminar el subject_id  y relacionar la tabla de respuestas con el estudiante-----listo
+- Vista de listado de Examenes disponibles, indicar que examen ya se tomo-----------listo
+- Al repetir un examen, se debe eliminar el registro anterior-----------------------listo
+
 - Para el Admnistrador, en el index, mostrar un resumen de:
     * cuantos alumnos registrados en la plataforma
     * cuantos examenes registrados en la plataforma
-    * cuantos examenes tomados por los alumnos
+    * cuantos examenes tomados por los alumnos--------------------------------------listo
+
 - Corregir el footer del menu
 
 Opcional

@@ -14,7 +14,6 @@ class StudentAnswer extends Model
 
     protected $allowedFields = [
         'user_id',
-        'subject_id',
         'question_id',
         'choice_id',
         'is_correct',
